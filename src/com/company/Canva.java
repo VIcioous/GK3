@@ -201,13 +201,13 @@ public class Canva extends JPanel {
     }
 
     private void setLabels() {
-        labelRr.setBounds(10,150,10,20);
-        labelGg.setBounds(90,150,10,20);
-        labelBb.setBounds(170,150,10,20);
-        labelCc.setBounds(250,150,10,20);
-        labelMm.setBounds(330,150,10,20);
-        labelYy.setBounds(410,150,10,20);
-        labelKk.setBounds(490,150,10,20);
+        labelRr.setBounds(20,150,10,20);
+        labelGg.setBounds(100,150,10,20);
+        labelBb.setBounds(180,150,10,20);
+        labelCc.setBounds(260,150,10,20);
+        labelMm.setBounds(340,150,10,20);
+        labelYy.setBounds(420,150,10,20);
+        labelKk.setBounds(500,150,10,20);
         labelR.setBounds(10,30,10,20);
         labelG.setBounds(10,60,10,20);
         labelB.setBounds(10,90,10,20);
@@ -277,7 +277,29 @@ public class Canva extends JPanel {
                         Integer.parseInt(GField.getText()),
                         Integer.parseInt(BField.getText()));
         });
+
+        convertButtonCMYKToRGB.addActionListener(e->
+        {
+            setRGBValuesFromText(
+                    Integer.parseInt(CField.getText()),
+                    Integer.parseInt(MField.getText()),
+                    Integer.parseInt(YField.getText()),
+                    Integer.parseInt(KField.getText()));
+        });
+
         this.add(convertButtonCMYKToRGB);
         this.add(convertButtonRGBToCMYK);
+    }
+
+    private void setRGBValuesFromText(int C, int M, int Y, int K) {
+        float red = 255* (((float)(255-C)/255)*((float)(255-K)/255));
+        float green =255* (((float)(255-M)/255)*((float)(255-K)/255));
+        float blue = 255*(((float)(255-Y)/255)*((float)(255-K)/255));
+
+
+        Color color = new Color((int)red,(int)green,(int)blue);
+        littleSquare.setBackground(color);
+        setRGBValues((int)red,(int)green,(int)blue);
+
     }
 }
