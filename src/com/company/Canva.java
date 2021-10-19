@@ -281,20 +281,20 @@ public class Canva extends JPanel {
         convertButtonCMYKToRGB.addActionListener(e->
         {
             setRGBValuesFromText(
-                    Integer.parseInt(CField.getText()),
-                    Integer.parseInt(MField.getText()),
-                    Integer.parseInt(YField.getText()),
-                    Integer.parseInt(KField.getText()));
+                    Float.parseFloat(CField.getText()),
+                    Float.parseFloat(MField.getText()),
+                    Float.parseFloat(YField.getText()),
+                    Float.parseFloat(KField.getText()));
         });
 
         this.add(convertButtonCMYKToRGB);
         this.add(convertButtonRGBToCMYK);
     }
 
-    private void setRGBValuesFromText(int C, int M, int Y, int K) {
-        float red = 255* (((float)(255-C)/255)*((float)(255-K)/255));
-        float green =255* (((float)(255-M)/255)*((float)(255-K)/255));
-        float blue = 255*(((float)(255-Y)/255)*((float)(255-K)/255));
+    private void setRGBValuesFromText(float C, float M, float Y, float K) {
+        float red = 255* (1-C)*(1-K);
+        float green =255* (1-M)*(1-K);
+        float blue = 255* (1-Y)*(1-K);
 
 
         Color color = new Color((int)red,(int)green,(int)blue);
