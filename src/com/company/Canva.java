@@ -48,22 +48,13 @@ public class Canva extends JPanel {
         setColorSquare();
         setSliders();
         setLabels();
-        RField.setBounds(30,150,60,20);
-        GField.setBounds(110,150,60,20);
-        BField.setBounds(190,150,60,20);
-        CField.setBounds(270,150,60,20);
-        MField.setBounds(350,150,60,20);
-        YField.setBounds(430,150,60,20);
-        KField.setBounds(510,150,60,20);
-        this.add(RField);
-        this.add(GField);
-        this.add(BField);
-        this.add(CField);
-        this.add(MField);
-        this.add(YField);
-        this.add(KField);
+        setFields();
+
+        CubeService cube = new CubeService();
+        cube.setVisible(true);
 
     }
+
 
 
 
@@ -229,6 +220,22 @@ public class Canva extends JPanel {
         this.add(labelCc);
         this.add(labelMm);
         this.add(labelRr);
+    }
+    private void setFields() {
+        RField.setBounds(30,150,60,20);
+        GField.setBounds(110,150,60,20);
+        BField.setBounds(190,150,60,20);
+        CField.setBounds(270,150,60,20);
+        MField.setBounds(350,150,60,20);
+        YField.setBounds(430,150,60,20);
+        KField.setBounds(510,150,60,20);
+        this.add(RField);
+        this.add(GField);
+        this.add(BField);
+        this.add(CField);
+        this.add(MField);
+        this.add(YField);
+        this.add(KField);
     }
 
     private void setSliders() {
