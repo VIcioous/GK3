@@ -138,6 +138,7 @@ public class Canva extends JPanel {
 
     }
 
+
     private void setSquareBackgroundRGB(int R, int G, int B) {
         Color color = new Color(R,G,B);
         littleSquare.setBackground(color);

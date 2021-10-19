@@ -26,7 +26,6 @@ public class CubeService extends JFrame implements MouseListener, MouseMotionLis
 
       angle = (float) Math.toRadians(40);
       distance = (width / 2) / (float) (Math.tan(angle / 2));
-      System.out.println("distance: " + distance);
 
       panel = new JPanel() {
           @Override
@@ -39,7 +38,7 @@ public class CubeService extends JFrame implements MouseListener, MouseMotionLis
       add(panel);
       pack();
       setLocationRelativeTo(null);
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
+
       this.addMouseListener(this);
       this.addMouseMotionListener(this);
       cube = new Cube();
@@ -119,6 +118,7 @@ public class CubeService extends JFrame implements MouseListener, MouseMotionLis
 
         public void project(Graphics g) {
 
+
             Point pointUpperLeftFront = upperLeftFront.to2D();
             Point pointUpperRightFront = upperRightFront.to2D();
             Point pointLowerLeftFront = lowerLeftFront.to2D();
@@ -128,57 +128,72 @@ public class CubeService extends JFrame implements MouseListener, MouseMotionLis
             Point pointLowerLeftBack= lowerLeftBack.to2D();
             Point pointLowerRightBack= lowerRightBack.to2D();
 
+            Graphics2D g2d =(Graphics2D)g;
+            Color red = Color.RED;
+            Color green = Color.GREEN;
+            Color blue = Color.BLUE;
+            Color magenta = Color.MAGENTA;
+            Color cyan = Color.CYAN;
+            Color yellow = Color.YELLOW;
+            Color black = Color.BLACK;
+            Color white = Color.WHITE;
 
-            g.setColor(Color.GREEN);
+            g2d.setColor(Color.GREEN);
             Polygon pFront = new Polygon();
             pFront.addPoint(pointLowerRightFront.x, pointLowerRightFront.y);
             pFront.addPoint(pointLowerLeftFront.x, pointLowerLeftFront.y);
             pFront.addPoint(pointUpperLeftFront.x, pointUpperLeftFront.y);
             pFront.addPoint(pointUpperRightFront.x, pointUpperRightFront.y);
-            g.drawPolygon(pFront);
-            g.fillPolygon(pFront);
+
+
+
+            g2d.drawPolygon(pFront);
+            g2d.fillPolygon(pFront);
 
             Polygon pBottom = new Polygon();
-            g.setColor(Color.MAGENTA);
+            g2d.setColor(Color.MAGENTA);
             pBottom.addPoint(pointLowerRightFront.x, pointLowerRightFront.y);
             pBottom.addPoint(pointLowerLeftFront.x, pointLowerLeftFront.y);
             pBottom.addPoint(pointLowerLeftBack.x, pointLowerLeftBack.y);
             pBottom.addPoint(pointLowerRightBack.x, pointLowerRightBack.y);
-            g.drawPolygon(pBottom);
-            g.fillPolygon(pBottom);
+            g2d.drawPolygon(pBottom);
+            g2d.fillPolygon(pBottom);
 
             Polygon pUp = new Polygon();
-            g.setColor(Color.CYAN);
+            g2d.setColor(Color.CYAN);
             pUp.addPoint(pointUpperRightFront.x, pointUpperRightFront.y);
             pUp.addPoint(pointUpperRightBack.x, pointUpperRightBack.y);
             pUp.addPoint(pointUpperLeftBack.x, pointUpperLeftBack.y);
             pUp.addPoint(pointUpperLeftFront.x, pointUpperLeftFront.y);
-            g.drawPolygon(pUp);
-            g.fillPolygon(pUp);
+            g2d.drawPolygon(pUp);
+            g2d.fillPolygon(pUp);
             Polygon pLeft = new Polygon();
-            g.setColor(Color.RED);
+            g2d.setColor(Color.RED);
             pLeft.addPoint(pointLowerLeftFront.x, pointLowerLeftFront.y);
             pLeft.addPoint(pointLowerLeftBack.x, pointLowerLeftBack.y);
             pLeft.addPoint(pointUpperLeftBack.x, pointUpperLeftBack.y);
             pLeft.addPoint(pointUpperLeftFront.x, pointUpperLeftFront.y);
-            g.drawPolygon(pLeft);
-            g.fillPolygon(pLeft);
+            g2d.drawPolygon(pLeft);
+            g2d.fillPolygon(pLeft);
             Polygon pRight= new Polygon();
-            g.setColor(Color.YELLOW);
+            g2d.setColor(Color.YELLOW);
             pRight.addPoint(pointUpperRightFront.x, pointUpperRightFront.y);
             pRight.addPoint(pointLowerRightFront.x, pointLowerRightFront.y);
             pRight.addPoint(pointLowerRightBack.x, pointLowerRightBack.y);
             pRight.addPoint(pointUpperRightBack.x,pointUpperRightBack.y);
-            g.drawPolygon(pRight);
-            g.fillPolygon(pRight);
-            g.setColor(Color.BLUE);
+            g2d.drawPolygon(pRight);
+            g2d.fillPolygon(pRight);
+            g2d.setColor(Color.BLUE);
             Polygon pBack = new Polygon();
             pBack.addPoint(pointUpperRightBack.x, pointUpperRightBack.y);
             pBack.addPoint(pointUpperLeftBack.x, pointUpperLeftBack.y);
             pBack.addPoint(pointLowerLeftBack.x, pointLowerLeftBack.y);
             pBack.addPoint(pointLowerRightBack.x, pointLowerRightBack.y);
-            g.drawPolygon(pBack);
-            g.fillPolygon(pBack);
+            g2d.drawPolygon(pBack);
+            GradientPaint rToW = new GradientPaint(pointUpperRightBack,red,pointLowerLeftBack,white);
+            g2d.setPaint(rToW);
+
+            g2d.fillPolygon(pBack);
 
         }
 
@@ -235,7 +250,7 @@ public class CubeService extends JFrame implements MouseListener, MouseMotionLis
         int dx = e.getX()-prevMove.x;
         int dy = e.getY()-prevMove.y;
 
-        if (e.isAltDown()) {
+        if (e.isShiftDown()) {
 
             if (e.isShiftDown()) {
                 rotX += dx/ROT_FACTOR;
